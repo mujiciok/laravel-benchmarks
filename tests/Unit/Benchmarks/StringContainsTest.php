@@ -1,10 +1,9 @@
 <?php
 
-namespace Tests\Unit\Benchmarks\Regex;
+namespace Tests\Unit\Benchmarks;
 
 use App\Benchmarks\BenchmarkServiceInterface;
-use App\Benchmarks\Regex\StringContains\StringContains;
-use Tests\Unit\Benchmarks\BenchmarkTestCase;
+use App\Benchmarks\StringContains\StringContains;
 
 class StringContainsTest extends BenchmarkTestCase
 {

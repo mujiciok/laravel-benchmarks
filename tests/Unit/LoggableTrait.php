@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Benchmarks;
+namespace Tests\Unit;
 
 use Illuminate\Support\Arr;
 

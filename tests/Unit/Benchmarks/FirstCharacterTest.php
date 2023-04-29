@@ -1,20 +1,19 @@
 <?php
 
-namespace Tests\Unit\Benchmarks\Regex;
+namespace Tests\Unit\Benchmarks;
 
 use App\Benchmarks\BenchmarkServiceInterface;
-use App\Benchmarks\Regex\LastCharacter\LastCharacter;
-use Tests\Unit\Benchmarks\BenchmarkTestCase;
+use App\Benchmarks\FirstCharacter\FirstCharacter;
 
-class LastCharacterTest extends BenchmarkTestCase
+class FirstCharacterTest extends BenchmarkTestCase
 {
-    private readonly LastCharacter $service;
+    private readonly FirstCharacter $service;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->service = $this->app->make(LastCharacter::class);
+        $this->service = $this->app->make(FirstCharacter::class);
     }
 
     public function getIterations(): array
@@ -32,9 +31,9 @@ class LastCharacterTest extends BenchmarkTestCase
     public function getMethods(): array
     {
         return [
-            'matchUsingStr' => 'Str::endsWith',
+            'matchUsingStr' => 'Str::startsWith',
             'matchUsingRegex' => 'preg_match',
-            'matchUsingPlainPhp' => 'str_ends_with',
+            'matchUsingPlainPhp' => 'str_starts_with',
         ];
     }
 
@@ -45,7 +44,7 @@ class LastCharacterTest extends BenchmarkTestCase
 
     public function getBenchmarkTitle(): string
     {
-        return '### `Str::endsWith` vs `preg_match` vs `str_ends_with`';
+        return '### `Str::startsWith` vs `preg_match` vs `str_starts_with`';
     }
 
     /**
@@ -65,11 +64,11 @@ class LastCharacterTest extends BenchmarkTestCase
         return [
             [
                 'haystack' => 'Hello World',
-                'needle' => 'd',
+                'needle' => 'H',
             ],
             [
                 'haystack' => 'Hello World',
-                'needle' => 'rld',
+                'needle' => 'Hel',
             ],
         ];
     }
@@ -92,22 +91,22 @@ class LastCharacterTest extends BenchmarkTestCase
         return [
             'single character' => [
                 'haystack' => 'Hello World',
-                'needle' => 'd',
+                'needle' => 'H',
                 'result' => true,
             ],
             'multiple characters' => [
                 'haystack' => 'Hello World',
-                'needle' => 'rld',
+                'needle' => 'Hel',
                 'result' => true,
             ],
             'single character different case' => [
                 'haystack' => 'Hello World',
-                'needle' => 'D',
+                'needle' => 'h',
                 'result' => false,
             ],
             'multiple characters different case' => [
                 'haystack' => 'Hello World',
-                'needle' => 'rLd',
+                'needle' => 'HEL',
                 'result' => false,
             ],
             'empty needle' => [
@@ -117,7 +116,7 @@ class LastCharacterTest extends BenchmarkTestCase
             ],
             'missing' => [
                 'haystack' => 'Hello World',
-                'needle' => 'l',
+                'needle' => 'e',
                 'result' => false,
             ],
         ];

@@ -1,10 +1,9 @@
 <?php
 
-namespace Tests\Unit\Benchmarks\Regex;
+namespace Tests\Unit\Benchmarks;
 
 use App\Benchmarks\BenchmarkServiceInterface;
-use App\Benchmarks\Regex\StringContainsCaseInsensitive\StringContainsCaseInsensitive;
-use Tests\Unit\Benchmarks\BenchmarkTestCase;
+use App\Benchmarks\StringContainsCaseInsensitive\StringContainsCaseInsensitive;
 
 class StringContainsCaseInsensitiveTest extends BenchmarkTestCase
 {

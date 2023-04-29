@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Benchmarks\Regex\StringContains;
+namespace App\Benchmarks\FirstCharacter;
 
 use App\Benchmarks\BenchmarkServiceInterface;
 use Illuminate\Support\Str;
 
-class StringContains implements BenchmarkServiceInterface
+class FirstCharacter implements BenchmarkServiceInterface
 {
     public function matchUsingStr(string $haystack, string $needle): bool
     {
-        return Str::contains($haystack, $needle);
+        return Str::startsWith($haystack, $needle);
     }
 
     public function matchUsingRegex(string $haystack, string $needle): bool
@@ -20,7 +20,7 @@ class StringContains implements BenchmarkServiceInterface
             return false;
         }
 
-        return (bool)preg_match("/$needle/", $haystack);
+        return (bool)preg_match("/^$needle/", $haystack);
     }
 
     public function matchUsingPlainPhp(string $haystack, string $needle): bool
@@ -29,6 +29,6 @@ class StringContains implements BenchmarkServiceInterface
             return false;
         }
 
-        return str_contains($haystack, $needle);
+        return str_starts_with($haystack, $needle);
     }
 }

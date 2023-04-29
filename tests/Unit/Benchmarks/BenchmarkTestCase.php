@@ -7,6 +7,7 @@ ini_set('max_execution_time', 600);
 use App\Benchmarks\BenchmarkServiceInterface;
 use Illuminate\Support\Benchmark;
 use Tests\TestCase;
+use Tests\Unit\LoggableTrait;
 
 abstract class BenchmarkTestCase extends TestCase
 {
