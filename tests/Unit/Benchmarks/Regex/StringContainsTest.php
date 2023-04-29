@@ -3,7 +3,7 @@
 namespace Tests\Unit\Benchmarks\Regex;
 
 use App\Benchmarks\BenchmarkServiceInterface;
-use App\Benchmarks\Regex\StringContains;
+use App\Benchmarks\Regex\StringContains\StringContains;
 use Tests\Unit\Benchmarks\BenchmarkTestCase;
 
 class StringContainsTest extends BenchmarkTestCase

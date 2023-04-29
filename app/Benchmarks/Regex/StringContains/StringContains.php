@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Benchmarks\Regex;
+namespace App\Benchmarks\Regex\StringContains;
 
 use App\Benchmarks\BenchmarkServiceInterface;
 use Illuminate\Support\Str;

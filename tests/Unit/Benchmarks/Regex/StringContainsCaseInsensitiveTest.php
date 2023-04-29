@@ -3,7 +3,7 @@
 namespace Tests\Unit\Benchmarks\Regex;
 
 use App\Benchmarks\BenchmarkServiceInterface;
-use App\Benchmarks\Regex\StringContainsCaseInsensitive;
+use App\Benchmarks\Regex\StringContainsCaseInsensitive\StringContainsCaseInsensitive;
 use Tests\Unit\Benchmarks\BenchmarkTestCase;
 
 class StringContainsCaseInsensitiveTest extends BenchmarkTestCase

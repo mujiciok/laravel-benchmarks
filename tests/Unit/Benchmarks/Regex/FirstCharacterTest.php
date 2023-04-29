@@ -3,7 +3,7 @@
 namespace Tests\Unit\Benchmarks\Regex;
 
 use App\Benchmarks\BenchmarkServiceInterface;
-use App\Benchmarks\Regex\FirstCharacter;
+use App\Benchmarks\Regex\FirstCharacter\FirstCharacter;
 use Tests\Unit\Benchmarks\BenchmarkTestCase;
 
 class FirstCharacterTest extends BenchmarkTestCase

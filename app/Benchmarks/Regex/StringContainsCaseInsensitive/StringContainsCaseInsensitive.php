@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Benchmarks\Regex;
+namespace App\Benchmarks\Regex\StringContainsCaseInsensitive;
 
 use App\Benchmarks\BenchmarkServiceInterface;
 use Illuminate\Support\Str;
 
-class FirstCharacter implements BenchmarkServiceInterface
+class StringContainsCaseInsensitive implements BenchmarkServiceInterface
 {
     public function matchUsingStr(string $haystack, string $needle): bool
     {
-        return Str::startsWith($haystack, $needle);
+        return Str::contains($haystack, $needle, true);
     }
 
     public function matchUsingRegex(string $haystack, string $needle): bool
@@ -20,7 +20,7 @@ class FirstCharacter implements BenchmarkServiceInterface
             return false;
         }
 
-        return (bool)preg_match("/^$needle/", $haystack);
+        return (bool)preg_match("/$needle/i", $haystack);
     }
 
     public function matchUsingPlainPhp(string $haystack, string $needle): bool
@@ -29,6 +29,9 @@ class FirstCharacter implements BenchmarkServiceInterface
             return false;
         }
 
-        return str_starts_with($haystack, $needle);
+        $haystack = strtolower($haystack);
+        $needle = strtolower($needle);
+
+        return str_contains($haystack, $needle);
     }
 }
