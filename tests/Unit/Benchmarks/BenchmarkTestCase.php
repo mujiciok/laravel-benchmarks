@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Benchmarks;
 
-ini_set('max_execution_time', 300);
+ini_set('max_execution_time', 600);
 
 use App\Benchmarks\BenchmarkServiceInterface;
 use Illuminate\Support\Benchmark;
@@ -26,7 +26,18 @@ abstract class BenchmarkTestCase extends TestCase
 
     abstract public function getBenchmarkTitle(): string;
 
-    public function defaultBenchmarkTest(string $haystack, string $needle): void
+    public function validate(string $haystack, string $needle, bool $expectedResult): void
+    {
+        $methods = $this->getMethods();
+        $service = $this->getBenchmarkService();
+
+        foreach ($methods as $methodName => $methodTableName) {
+            $actualResult = $service->{$methodName}($haystack, $needle);
+            $this->assertEquals($expectedResult, $actualResult, $methodName);
+        }
+    }
+
+    public function benchmark(string $haystack, string $needle): void
     {
         $logData = [];
         $methodsData = $this->getMethods();

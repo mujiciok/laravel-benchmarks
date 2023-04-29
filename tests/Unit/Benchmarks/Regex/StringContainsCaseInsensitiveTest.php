@@ -3,18 +3,18 @@
 namespace Tests\Unit\Benchmarks\Regex;
 
 use App\Benchmarks\BenchmarkServiceInterface;
-use App\Benchmarks\Regex\LastCharacter;
+use App\Benchmarks\Regex\StringContainsCaseInsensitive;
 use Tests\Unit\Benchmarks\BenchmarkTestCase;
 
-class LastCharacterTest extends BenchmarkTestCase
+class StringContainsCaseInsensitiveTest extends BenchmarkTestCase
 {
-    private readonly LastCharacter $service;
+    private readonly StringContainsCaseInsensitive $service;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->service = $this->app->make(LastCharacter::class);
+        $this->service = $this->app->make(StringContainsCaseInsensitive::class);
     }
 
     public function getIterations(): array
@@ -32,9 +32,9 @@ class LastCharacterTest extends BenchmarkTestCase
     public function getMethods(): array
     {
         return [
-            'matchUsingStr' => 'Str::endsWith',
+            'matchUsingStr' => 'Str::contains',
             'matchUsingRegex' => 'preg_match',
-            'matchUsingPlainPhp' => 'str_ends_with',
+            'matchUsingPlainPhp' => 'str_contains',
         ];
     }
 
@@ -45,7 +45,7 @@ class LastCharacterTest extends BenchmarkTestCase
 
     public function getBenchmarkTitle(): string
     {
-        return '### `Str::endsWith` vs `preg_match` vs `str_ends_with`';
+        return '### Case insensitive `Str::contains` vs `preg_match` vs `str_contains`';
     }
 
     /**
@@ -64,12 +64,8 @@ class LastCharacterTest extends BenchmarkTestCase
     {
         return [
             [
-                'haystack' => 'Hello World',
-                'needle' => 'd',
-            ],
-            [
-                'haystack' => 'Hello World',
-                'needle' => 'rld',
+                'haystack' => 'Some text and some more',
+                'needle' => 'AND',
             ],
         ];
     }
@@ -90,34 +86,39 @@ class LastCharacterTest extends BenchmarkTestCase
     public function providesTestCases(): array
     {
         return [
-            'single character' => [
-                'haystack' => 'Hello World',
-                'needle' => 'd',
+            'same case' => [
+                'haystack' => 'Some text and some more',
+                'needle' => 'and',
                 'result' => true,
             ],
-            'multiple characters' => [
-                'haystack' => 'Hello World',
-                'needle' => 'rld',
+            'different case' => [
+                'haystack' => 'Some text and some more',
+                'needle' => 'AND',
                 'result' => true,
             ],
-            'single character different case' => [
-                'haystack' => 'Hello World',
-                'needle' => 'D',
-                'result' => false,
+            'mixed needle case' => [
+                'haystack' => 'Some text and some more',
+                'needle' => 'aNd',
+                'result' => true,
             ],
-            'multiple characters different case' => [
-                'haystack' => 'Hello World',
-                'needle' => 'rLd',
-                'result' => false,
+            'mixed haystack case' => [
+                'haystack' => 'Some text AnD some more',
+                'needle' => 'and',
+                'result' => true,
+            ],
+            'multiple words' => [
+                'haystack' => 'Some text and some more',
+                'needle' => 'text and',
+                'result' => true,
             ],
             'empty needle' => [
-                'haystack' => 'Hello World',
+                'haystack' => 'Some text and some more',
                 'needle' => '',
                 'result' => false,
             ],
             'missing' => [
-                'haystack' => 'Hello World',
-                'needle' => 'l',
+                'haystack' => 'Some text and some more',
+                'needle' => 'word',
                 'result' => false,
             ],
         ];

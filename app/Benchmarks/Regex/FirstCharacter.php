@@ -16,11 +16,19 @@ class FirstCharacter implements BenchmarkServiceInterface
 
     public function matchUsingRegex(string $haystack, string $needle): bool
     {
+        if (!$needle) {
+            return false;
+        }
+
         return (bool)preg_match("/^$needle/", $haystack);
     }
 
     public function matchUsingPlainPhp(string $haystack, string $needle): bool
     {
+        if (!$needle) {
+            return false;
+        }
+
         return str_starts_with($haystack, $needle);
     }
 }

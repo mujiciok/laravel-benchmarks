@@ -45,11 +45,11 @@ class FirstCharacterTest extends BenchmarkTestCase
 
     public function getBenchmarkTitle(): string
     {
-        return '#### `Str::startsWith` vs `preg_match` vs `str_starts_with`';
+        return '### `Str::startsWith` vs `preg_match` vs `str_starts_with`';
     }
 
     /**
-     * @dataProvider providesMatchTestCases
+     * @dataProvider providesBenchmarkTestCases
      *
      * @param string $haystack
      * @param string $needle
@@ -57,35 +57,68 @@ class FirstCharacterTest extends BenchmarkTestCase
      */
     public function testBenchmark(string $haystack, string $needle): void
     {
-        $this->defaultBenchmarkTest($haystack, $needle);
+        $this->benchmark($haystack, $needle);
+    }
+
+    public function providesBenchmarkTestCases(): array
+    {
+        return [
+            [
+                'haystack' => 'Hello World',
+                'needle' => 'H',
+            ],
+            [
+                'haystack' => 'Hello World',
+                'needle' => 'Hel',
+            ],
+        ];
     }
 
     /**
-     * @dataProvider providesMatchTestCases
+     * @dataProvider providesTestCases
      *
      * @param string $haystack
      * @param string $needle
-     * @param bool $result
+     * @param bool $expectedResult
      * @return void
      */
-    public function testMatches(string $haystack, string $needle, bool $result): void
+    public function testValidation(string $haystack, string $needle, bool $expectedResult): void
     {
-        $strResult = $this->service->matchUsingStr($haystack, $needle);
-        $regexResult = $this->service->matchUsingRegex($haystack, $needle);
-        $phpResult = $this->service->matchUsingPlainPhp($haystack, $needle);
-
-        $this->assertEquals($result, $strResult);
-        $this->assertEquals($result, $regexResult);
-        $this->assertEquals($result, $phpResult);
+        $this->validate($haystack, $needle, $expectedResult);
     }
 
-    public function providesMatchTestCases(): array
+    public function providesTestCases(): array
     {
         return [
-            'simple' => [
+            'single character' => [
                 'haystack' => 'Hello World',
                 'needle' => 'H',
                 'result' => true,
+            ],
+            'multiple characters' => [
+                'haystack' => 'Hello World',
+                'needle' => 'Hel',
+                'result' => true,
+            ],
+            'single character different case' => [
+                'haystack' => 'Hello World',
+                'needle' => 'h',
+                'result' => false,
+            ],
+            'multiple characters different case' => [
+                'haystack' => 'Hello World',
+                'needle' => 'HEL',
+                'result' => false,
+            ],
+            'empty needle' => [
+                'haystack' => 'Hello World',
+                'needle' => '',
+                'result' => false,
+            ],
+            'missing' => [
+                'haystack' => 'Hello World',
+                'needle' => 'e',
+                'result' => false,
             ],
         ];
     }
