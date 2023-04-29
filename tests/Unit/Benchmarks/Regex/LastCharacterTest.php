@@ -45,7 +45,7 @@ class LastCharacterTest extends BenchmarkTestCase
 
     public function getBenchmarkTitle(): string
     {
-        return 'Str::endsWith vs preg_match vs str_ends_with';
+        return '#### `Str::endsWith` vs `preg_match` vs `str_ends_with`';
     }
 
     /**
