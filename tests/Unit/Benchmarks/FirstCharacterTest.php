@@ -32,6 +32,7 @@ class FirstCharacterTest extends BenchmarkTestCase
     {
         return [
             'matchUsingStr' => 'Str::startsWith',
+            'matchUsingFluentStr' => 'Str::of()->startsWith',
             'matchUsingRegex' => 'preg_match',
             'matchUsingPlainPhp' => 'str_starts_with',
         ];
@@ -44,7 +45,7 @@ class FirstCharacterTest extends BenchmarkTestCase
 
     public function getBenchmarkTitle(): string
     {
-        return '### `Str::startsWith` vs `preg_match` vs `str_starts_with`';
+        return '### `Str::startsWith` vs `Str::of()->startsWith` vs `preg_match` vs `str_starts_with`';
     }
 
     /**

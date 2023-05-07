@@ -32,6 +32,7 @@ class LastCharacterTest extends BenchmarkTestCase
     {
         return [
             'matchUsingStr' => 'Str::endsWith',
+            'matchUsingFluentStr' => 'Str::of()->endsWith',
             'matchUsingRegex' => 'preg_match',
             'matchUsingPlainPhp' => 'str_ends_with',
         ];
@@ -44,7 +45,7 @@ class LastCharacterTest extends BenchmarkTestCase
 
     public function getBenchmarkTitle(): string
     {
-        return '### `Str::endsWith` vs `preg_match` vs `str_ends_with`';
+        return '### `Str::endsWith` vs `Str::of()->endsWith` vs `preg_match` vs `str_ends_with`';
     }
 
     /**

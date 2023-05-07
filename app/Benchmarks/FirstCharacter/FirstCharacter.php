@@ -14,6 +14,11 @@ class FirstCharacter implements BenchmarkServiceInterface
         return Str::startsWith($haystack, $needle);
     }
 
+    public function matchUsingFluentStr(string $haystack, string $needle): bool
+    {
+        return Str::of($haystack)->startsWith($needle);
+    }
+
     public function matchUsingRegex(string $haystack, string $needle): bool
     {
         if (!$needle) {

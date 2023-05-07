@@ -32,6 +32,7 @@ class StringContainsTest extends BenchmarkTestCase
     {
         return [
             'matchUsingStr' => 'Str::contains',
+            'matchUsingFluentStr' => 'Str::of()->contains',
             'matchUsingRegex' => 'preg_match',
             'matchUsingPlainPhp' => 'str_contains',
         ];
@@ -44,7 +45,7 @@ class StringContainsTest extends BenchmarkTestCase
 
     public function getBenchmarkTitle(): string
     {
-        return '### `Str::contains` vs `preg_match` vs `str_contains`';
+        return '### `Str::contains` vs `Str::of()->contains` vs `preg_match` vs `str_contains`';
     }
 
     /**

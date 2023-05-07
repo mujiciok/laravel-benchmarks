@@ -14,6 +14,11 @@ class LastCharacter implements BenchmarkServiceInterface
         return Str::endsWith($haystack, $needle);
     }
 
+    public function matchUsingFluentStr(string $haystack, string $needle): bool
+    {
+        return Str::of($haystack)->endsWith($needle);
+    }
+
     public function matchUsingRegex(string $haystack, string $needle): bool
     {
         if (!$needle) {

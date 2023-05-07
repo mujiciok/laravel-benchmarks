@@ -14,6 +14,11 @@ class StringContains implements BenchmarkServiceInterface
         return Str::contains($haystack, $needle);
     }
 
+    public function matchUsingFluentStr(string $haystack, string $needle): bool
+    {
+        return Str::of($haystack)->contains($needle);
+    }
+
     public function matchUsingRegex(string $haystack, string $needle): bool
     {
         if (!$needle) {
