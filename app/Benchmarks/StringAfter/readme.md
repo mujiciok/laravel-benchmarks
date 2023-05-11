@@ -1,4 +1,4 @@
-### `Str::startsWith` vs `Str::of()->startsWith` vs `preg_match` vs `str_starts_with`
+### `Str::after` vs `Str::of()->after` vs `preg_replace` vs `array_reverse & explode` vs `substr & strpos`
 
 ##### Multiple characters with multiple occurrences
 
