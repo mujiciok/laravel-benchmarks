@@ -16,18 +16,6 @@ class FirstCharacterTest extends BenchmarkTestCase
         $this->service = $this->app->make(FirstCharacter::class);
     }
 
-    public function getIterations(): array
-    {
-        return [
-            10 => 'x10',
-            100 => 'x100',
-            1_000 => 'x1_000',
-            10_000 => 'x10_000',
-            100_000 => 'x100_000',
-            1_000_000 => 'x1_000_000',
-        ];
-    }
-
     public function getMethods(): array
     {
         return [
@@ -84,7 +72,7 @@ class FirstCharacterTest extends BenchmarkTestCase
      */
     public function testValidation(string $haystack, string $needle, bool $expectedResult): void
     {
-        $this->validate($haystack, $needle, $expectedResult);
+        $this->validate($expectedResult, $haystack, $needle);
     }
 
     public function providesTestCases(): array
