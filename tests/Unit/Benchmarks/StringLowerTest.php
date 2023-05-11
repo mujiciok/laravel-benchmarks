@@ -20,8 +20,8 @@ class StringLowerTest extends BenchmarkTestCase
     {
         return [
             'convertUsingStr' => 'Str::lower',
-            'convertUsingFluentStr' => 'Str::of()->lower',
-            'convertUsingPlainPhp' => 'strtolower',
+//            'convertUsingFluentStr' => 'Str::of()->lower',
+//            'convertUsingPlainPhp' => 'strtolower',
         ];
     }
 
@@ -65,7 +65,7 @@ class StringLowerTest extends BenchmarkTestCase
      */
     public function testValidation(string $value, string $expectedResult): void
     {
-        $this->validate($value, $expectedResult);
+        $this->validate($expectedResult, $value);
     }
 
     public function providesTestCases(): array

@@ -5,6 +5,7 @@
 - [Str::contains](https://github.com/mujiciok/laravel-benchmarks/tree/master/app/Benchmarks/StringContains/readme.md)
 - [Str::contains (case-insensitive)](https://github.com/mujiciok/laravel-benchmarks/tree/master/app/Benchmarks/StringContainsCaseInsensitive/readme.md)
 - [Str::lower](https://github.com/mujiciok/laravel-benchmarks/tree/master/app/Benchmarks/StringLower/readme.md)
+- [Str::after](https://github.com/mujiciok/laravel-benchmarks/tree/master/app/Benchmarks/StringAfter/readme.md)
 
 
 ## Running benchmarks locally

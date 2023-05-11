@@ -37,14 +37,14 @@ abstract class BenchmarkTestCase extends TestCase
         ];
     }
 
-    public function validate(bool $expectedResult, ...$methodCallArgs): void
+    public function validate(mixed $expectedResult, ...$methodCallArgs): void
     {
         $methods = $this->getMethods();
         $service = $this->getBenchmarkService();
 
         foreach ($methods as $methodName => $methodTableName) {
             $actualResult = $service->{$methodName}(...$methodCallArgs);
-            $this->assertEquals($expectedResult, $actualResult, $methodName);
+            $this->assertSame($expectedResult, $actualResult, $methodName);
         }
     }
 
